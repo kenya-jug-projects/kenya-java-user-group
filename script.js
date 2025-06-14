@@ -34,13 +34,11 @@ class TeamSlider {
         this.currentSlide = 0;
         this.teamMembers = document.querySelectorAll('.team-member');
         this.teamDots = document.querySelectorAll('.team-dot');
-        this.prevButton = document.getElementById('team-prev');
-        this.nextButton = document.getElementById('team-next');
         this.totalSlides = this.teamMembers.length;
-        
+
         this.init();
     }
-    
+
     init() {
         // Add click event to dots
         this.teamDots.forEach((dot, index) => {
@@ -48,50 +46,29 @@ class TeamSlider {
                 this.goToSlide(index);
             });
         });
-        
-        // Add click events to navigation arrows
-        this.prevButton.addEventListener('click', () => {
-            this.prevSlide();
-        });
-        
-        this.nextButton.addEventListener('click', () => {
-            this.nextSlide();
-        });
-        
+
         // Auto-advance slides every 5 seconds
         setInterval(() => {
             this.nextSlide();
         }, 5000);
     }
-    
+
     goToSlide(slideIndex) {
-        // Hide all team members
-        this.teamMembers.forEach(member => {
-            member.classList.remove('active');
-        });
-        
-        // Remove active class from all dots
-        this.teamDots.forEach(dot => {
-            dot.classList.remove('active');
-        });
-        
-        // Show current team member
+        this.teamMembers.forEach(member => member.classList.remove('active'));
+        this.teamDots.forEach(dot => dot.classList.remove('active'));
+
         this.teamMembers[slideIndex].classList.add('active');
         this.teamDots[slideIndex].classList.add('active');
-        
+
         this.currentSlide = slideIndex;
     }
-    
+
     nextSlide() {
         const nextIndex = (this.currentSlide + 1) % this.totalSlides;
         this.goToSlide(nextIndex);
     }
-    
-    prevSlide() {
-        const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-        this.goToSlide(prevIndex);
-    }
 }
+
 
 // Testimonials Slider
 class TestimonialsSlider {
